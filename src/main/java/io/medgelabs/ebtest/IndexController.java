@@ -8,7 +8,7 @@ public class IndexController {
 
     @GetMapping("/")
     public ZimQuote index() {
-        return new ZimQuote("I'M GONNA SING THE DOOM SONG NOW!");
+        return new ZimQuote("I HAVE SING THE DOOM SONG NOW!");
     }
 
 }
