@@ -16,14 +16,14 @@ docker build -t $NAME:$VERSION .
 docker tag $NAME:$VERSION ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/$NAME:$VERSION
 docker push ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/$NAME:$VERSION
 
-cp Dockerrun.aws.json.template Dockerrun.aws.json
+cp /ci/Dockerrun.aws.json.template ci/Dockerrun.aws.json
 
 # Replace the <AWS_ACCOUNT_ID> with the real ID
-sed -i='' "s/<AWS_ACCOUNT_ID>/$AWS_ACCOUNT_ID/" Dockerrun.aws.json
+sed -i='' "s/<AWS_ACCOUNT_ID>/$AWS_ACCOUNT_ID/" ci/Dockerrun.aws.json
 # Replace the <NAME> with the real name
-sed -i='' "s/<NAME>/$NAME/" Dockerrun.aws.json
+sed -i='' "s/<NAME>/$NAME/" ci/Dockerrun.aws.json
 # Replace the <TAG> with the real version number
-sed -i='' "s/<TAG>/$VERSION/" Dockerrun.aws.json
+sed -i='' "s/<TAG>/$VERSION/" ci/Dockerrun.aws.json
 
 # Zip up the Dockerrun file (feel free to zip up an .ebextensions directory with it)
 zip -r $ZIP Dockerrun.aws.json
@@ -31,7 +31,7 @@ zip -r $ZIP Dockerrun.aws.json
 aws s3 cp $ZIP s3://$EB_BUCKET/$ZIP
 
 #Delete leftover files
-rm -f $ZIP Dockerrun.aws.json Dockerrun.aws.json=
+rm -f $ZIP ci/Dockerrun.aws.json ci/Dockerrun.aws.json=
 
 # Create a new application version with the zipped up Dockerrun file
 aws elasticbeanstalk create-application-version --application-name $NAME \
