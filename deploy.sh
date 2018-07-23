@@ -39,7 +39,7 @@ aws elasticbeanstalk create-application-version --application-name $NAME \
     --version-label $VERSION --source-bundle S3Bucket=$EB_BUCKET,S3Key=$ZIP
 
 # Update the environment to use the new application version
-aws elasticbeanstalk update-environment --environment-name $NAME \
+aws elasticbeanstalk update-environment --environment-name $NAME-env \
       --version-label $VERSION
 
 deploystart=$(date +%s)
