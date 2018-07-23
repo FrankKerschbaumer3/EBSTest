@@ -16,7 +16,7 @@ docker build -t $NAME:$VERSION .
 docker tag $NAME:$VERSION ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/$NAME:$VERSION
 docker push ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/$NAME:$VERSION
 
-cp /ci/Dockerrun.aws.json.template ci/Dockerrun.aws.json
+cp ci/Dockerrun.aws.json.template ci/Dockerrun.aws.json
 
 # Replace the <AWS_ACCOUNT_ID> with the real ID
 sed -i='' "s/<AWS_ACCOUNT_ID>/$AWS_ACCOUNT_ID/" ci/Dockerrun.aws.json
