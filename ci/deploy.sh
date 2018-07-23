@@ -26,7 +26,7 @@ sed -i='' "s/<NAME>/$NAME/" ci/Dockerrun.aws.json
 sed -i='' "s/<TAG>/$VERSION/" ci/Dockerrun.aws.json
 
 # Zip up the Dockerrun file (feel free to zip up an .ebextensions directory with it)
-zip -r $ZIP Dockerrun.aws.json
+zip -r $ZIP ci/Dockerrun.aws.json
 
 aws s3 cp $ZIP s3://$EB_BUCKET/$ZIP
 
