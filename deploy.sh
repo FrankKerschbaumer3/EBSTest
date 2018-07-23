@@ -31,7 +31,7 @@ zip -r $ZIP Dockerrun.aws.json
 
 aws s3 cp $ZIP s3://$EB_BUCKET/$ZIP
 
-#delete leftover shit
+#Delete files
 rm -f $ZIP Dockerrun.aws.json Dockerrun.aws.json=
 
 # Create a new application version with the zipped up Dockerrun file
