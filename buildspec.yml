@@ -1,11 +1,13 @@
-##version: 0.2
+version: 0.2
 
-#phases:
-#    build:
-#        commands:
-#            - export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --output text --query 'Account')
-#            - export BRANCH_NAME=$(git describe --contains --all HEAD | sed -e 's/remotes\/.*\///g')
-#            - export IMAGE_TAG=${IMAGE_TAG:-$BRANCH_NAME}
-#            - export APP_VERSION=1.0.0
-#            - chmod +x ./ci/docker-deploy.sh
-#            - ./ci/docker-deploy.sh --account-id "${AWS_ACCOUNT_ID}" --region "${AWS_DEFAULT_REGION}" --repo "${REPO_NAME}" --tag "${IMAGE_TAG}" --version "${APP_VERSION}" --branch "${BRANCH_NAME}"
+phases:
+    build:
+        commands:
+            - export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --output text --query 'Account')
+            - export BRANCH_NAME=$(git describe --contains --all HEAD | sed -e 's/remotes\/.*\///g')
+            - export IMAGE_TAG=${IMAGE_TAG:-$BRANCH_NAME}
+            - export APP_VERSION=1.0.0
+            - chmod +x ./ci/docker-deploy.sh
+            - ./ci/docker-deploy.sh --account-id "${AWS_ACCOUNT_ID}" --region "${AWS_DEFAULT_REGION}" --repo "${REPO_NAME}" --tag "${IMAGE_TAG}" --version "${APP_VERSION}" --branch "${BRANCH_NAME}"
+            - chmod -x ./deploy.sh 
+            - ./deploy.sh --account-id "${AWS_ACCOUNT_ID}" --region "${AWS_DEFAULT_REGION}" --repo "${REPO_NAME}" --tag "${IMAGE_TAG}" --version "${APP_VERSION}" --branch "${BRANCH_NAME}"

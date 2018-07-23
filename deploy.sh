@@ -1,8 +1,7 @@
 #!/bin/bash
 
-AWS_ACCOUNT_ID=$ID
 NAME=ebstest
-EB_BUCKET=elasticbeanstalk-us-east-1-$ID
+EB_BUCKET=elasticbeanstalk-us-east-1-${AWS_ACCOUNT_ID}
 
 VERSION=1
 ZIP=$VERSION.zip
@@ -14,13 +13,13 @@ $(aws ecr get-login --no-include-email)
 
 # Build and push the image
 docker build -t $NAME:$VERSION .
-docker tag $NAME:$VERSION $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/$NAME:$VERSION
-docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/$NAME:$VERSION
+docker tag $NAME:$VERSION ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/$NAME:$VERSION
+docker push ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/$NAME:$VERSION
 
 cp Dockerrun.aws.json.template Dockerrun.aws.json
 
 # Replace the <AWS_ACCOUNT_ID> with the real ID
-sed -i='' "s/<AWS_ACCOUNT_ID>/$AWS_ACCOUNT_ID/" Dockerrun.aws.json
+sed -i='' "s/<AWS_ACCOUNT_ID>/${AWS_ACCOUNT_ID}/" Dockerrun.aws.json
 # Replace the <NAME> with the real name
 sed -i='' "s/<NAME>/$NAME/" Dockerrun.aws.json
 # Replace the <TAG> with the real version number
