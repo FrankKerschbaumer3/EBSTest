@@ -1,6 +1,4 @@
 #!/bin/bash
-
-NAME=testing
 EB_BUCKET=elasticbeanstalk-us-east-1-${AWS_ACCOUNT_ID}
 VERSION=$(git rev-parse EBSv1)
 ZIP=$VERSION.zip
