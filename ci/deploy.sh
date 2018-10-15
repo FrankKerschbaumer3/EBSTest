@@ -2,8 +2,7 @@
 
 NAME=ebstest
 EB_BUCKET=elasticbeanstalk-us-east-1-${AWS_ACCOUNT_ID}
-
-VERSION=$(git rev-parse dev)
+VERSION=$(git rev-parse docker-v2)
 ZIP=$VERSION.zip
 
 aws configure set default.region us-east-1
