@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NAME=testingenv
+NAME=testing
 EB_BUCKET=elasticbeanstalk-us-east-1-${AWS_ACCOUNT_ID}
 VERSION=$(git rev-parse docker-v2)
 ZIP=$VERSION.zip
