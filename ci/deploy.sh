@@ -41,7 +41,7 @@ aws elasticbeanstalk update-environment --environment-name $NAME-env \
       --version-label $VERSION
 
 deploystart=$(date +%s)
-timeout=60 # Seconds to wait before error. If it's taking awhile - your boxes probably are too small.
+timeout=120 # Seconds to wait before error. If it's taking awhile - your boxes probably are too small.
 threshhold=$((deploystart + timeout))
 while true; do
     # Check for timeout
