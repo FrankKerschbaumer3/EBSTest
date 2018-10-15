@@ -27,6 +27,8 @@ sed -i='' "s/<TAG>/$VERSION/" Dockerrun.aws.json
 # Zip up the Dockerrun file (feel free to zip up an .ebextensions directory with it)
 zip -r $ZIP Dockerrun.aws.json
 
+if 
+
 aws s3 cp $ZIP s3://$EB_BUCKET/$ZIP
 
 #Delete files
@@ -52,9 +54,9 @@ while true; do
     fi
 
     # See what's deployed
-    current_version=`aws elasticbeanstalk describe-environments --application-name "$NAME" --environment-name "$NAME"-env --query "Environments[*].VersionLabel" --output text`
+    current_version=`aws elasticbeanstalk describe-environments --application-name "$NAME" --environment-name "$NAME" --query "Environments[*].VersionLabel" --output text`
 
-    status=`aws elasticbeanstalk describe-environments --application-name "$NAME" --environment-name "$NAME"-env --query "Environments[*].Status" --output text`
+    status=`aws elasticbeanstalk describe-environments --application-name "$NAME" --environment-name "$NAME" --query "Environments[*].Status" --output text`
 
     if [ "$current_version" != "$VERSION" ]; then
         echo "Tag not updated (currently $version). Waiting."
